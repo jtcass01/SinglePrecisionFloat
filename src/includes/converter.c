@@ -121,26 +121,22 @@ SinglePrecisionFloat *create_single_precision_float_from_float(float num) {
 		for (int i = 0; i < right_size; i++) {
 			if (index >= 23) {
 				break;
-			}
-			else {
+			} else {
 				mantissa_c[index] = RightSide[i];
 				index++;
 			}
 		}
-	}
-	else {
+	}	else {
 		int found = 0;
 		for (int i = 0; i < right_size; i++) {
 			if (found) {
 				if (index >= 23) {
 					break;
-				}
-				else {
+				}	else {
 					mantissa_c[index] = RightSide[i];
 					index++;
 				}
-			}
-			else {
+			}	else {
 				if (RightSide[i] == '1') {
 					found = 1;
 				}
@@ -156,14 +152,14 @@ SinglePrecisionFloat *create_single_precision_float_from_float(float num) {
 	/* ====                       =====*/
 	if (num == 0) {
 		spf_float->hex = 0;
-	}
-	else {
+	} else {
 		spf_float->hex = get_hex(spf_float->sign, spf_float->exponent, spf_float->mantissa);
 	}
 
 	#if DEBUG
 		print_float(spf_float);
 	#endif
+
 	free(LeftSide);
 	free(RightSide);
 
@@ -225,8 +221,7 @@ SinglePrecisionFloat *create_single_precision_float_from_hex(uint32_t hex_value)
 char get_mask_value(uint32_t hex_value, int bit) {
 	if ( (hex_value >> bit) & 1 ) {
 		return '1';
-	}
-	else {
+	}	else {
 		return '0';
 	}
 }
@@ -235,8 +230,7 @@ char get_mask_value(uint32_t hex_value, int bit) {
 void print_float(SinglePrecisionFloat *spf_float) {
 	if (spf_float == NULL) {
 		printf("This is a NULL object.  Cannot print.\n");
-	}
-	else {
+	}	else {
 		printf("Decimal value: %f, sign: %s, exponent: %s, mantissa: %s, Hex: 0x%X\n", spf_float->o, spf_float->sign, spf_float->exponent, spf_float->mantissa, spf_float->hex);
 	}
 }
@@ -266,8 +260,7 @@ char *create_binary_representation(int integer, int bits) {
 	while (integer != 0 && index < bits) {
 		if ((integer % 2) == 0) { // No remainder
 			*(temp + index) = '0';
-		}
-		else {
+		}	else {
 			*(temp + index) = '1';
 		}
 		integer /= 2;
@@ -280,8 +273,7 @@ char *create_binary_representation(int integer, int bits) {
 	for (int i = 0; i < binary_size; i++) {
 		if(index > 0) {
 			binary_c[i+index] = temp[binary_size - i - 1];
-		}
-		else {
+		}	else {
 			binary_c[i] = temp[binary_size - i - 1];
 		}
 	}
@@ -299,7 +291,7 @@ char *create_binary_representation(int integer, int bits) {
 int get_exponent_from_float(char *binary_left_half, int negative) {
 	int exponent_shift = 0;
 
-	if (negative) {
+	if (negative) { // If negative
 		while (binary_left_half[exponent_shift] != '\0') {
 			exponent_shift++;
 			if (binary_left_half[exponent_shift] == '1') {
@@ -308,8 +300,7 @@ int get_exponent_from_float(char *binary_left_half, int negative) {
 		}
 
 		exponent_shift *= -1;
-	}
-	else {
+	}	else { // If positive
 		while (binary_left_half[exponent_shift] != '\0') {
 			exponent_shift++;
 		}
@@ -382,8 +373,7 @@ float get_float(char *sign, char *exponent, char *mantissa) {
 		result = 0.0;
 		left_size++;
 		index = 1;
-	}
-	else {
+	}	else {
 		left_side[0] = '1';
 		left_size++;
 		index = 1;
