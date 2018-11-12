@@ -5,8 +5,7 @@ char *ftoa(float input, char result[]) {
 	char *p = result;
 
 	if(input < 0) {
-		*p = '-';
-		*p++;
+		*p++ = '-';
 		input *= -1;
 	}
 
@@ -17,9 +16,9 @@ char *ftoa(float input, char result[]) {
 	}while(left_half);
 	*result = '.';
 	do{ //Move back, inserting digits as u go
-			*--p = digit[input%10];
-			input = input/10;
-	}while(input);
+			*--p = digit[left_half%10];
+			left_half = left_half/10;
+	}while(left_half);
 
 
 	// Move back to decimal
@@ -32,7 +31,7 @@ char *ftoa(float input, char result[]) {
 
 	for(int i = 0; i < number_of_decimal_places; i++) {
 		right_half *= 10;
-		*++p = digit[input%10];
+		*++p = digit[((int)right_half) % 10];
 	}
 
 	return result;
