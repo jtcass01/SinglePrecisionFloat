@@ -14,7 +14,7 @@ char *ftoa(float input, char result[]) {
 			++p;
 			left_half = left_half/10;
 	}while(left_half);
-	*result = '.';
+	*p = '.';
 	do{ //Move back, inserting digits as u go
 			*--p = digit[left_half%10];
 			left_half = left_half/10;
@@ -33,6 +33,7 @@ char *ftoa(float input, char result[]) {
 		right_half *= 10;
 		*++p = digit[((int)right_half) % 10];
 	}
+  *p = '\0';
 
 	return result;
 }
