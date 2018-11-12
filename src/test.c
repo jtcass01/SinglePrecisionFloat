@@ -1,5 +1,7 @@
 #include "headers/test.h"
 
+uint8_t float_result[32];
+
 char *ftoa(float input, char result[]) {
 	char const digit[] = "0123456789";
 	char *p = result;
@@ -54,7 +56,6 @@ void prompt_convert_number(void) {
   printf("%X represented as float is %f\n", spf_float->hex, spf_float->o);
   delete_single_precision_float(spf_float);
 
-  char float_result[32];
 
   ftoa(42.8008, float_result);
 
