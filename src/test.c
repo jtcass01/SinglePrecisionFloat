@@ -1,7 +1,7 @@
 #include "headers/test.h"
 
 char *ftoa(float input, char result[]) {
-	char const digit[] = "0123456789"
+	char const digit[] = "0123456789";
 	char *p = result;
 
 	if(input < 0) {
@@ -54,7 +54,11 @@ void prompt_convert_number(void) {
   printf("%X represented as float is %f\n", spf_float->hex, spf_float->o);
   delete_single_precision_float(spf_float);
 
-  printf("Testing ftoa function.  %f in ascii is %s", 42.8008, ftoa(42.8008));
+  char* float_result[];
+
+  ftoa(42.8008, float_result);
+
+  printf("Testing ftoa function.  %f in ascii is %s", 42.8008, float_result);
 }
 
 int menu(void) {
