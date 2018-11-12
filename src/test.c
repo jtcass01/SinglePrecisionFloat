@@ -54,7 +54,7 @@ void prompt_convert_number(void) {
   printf("%X represented as float is %f\n", spf_float->hex, spf_float->o);
   delete_single_precision_float(spf_float);
 
-  char* float_result[];
+  char float_result[32];
 
   ftoa(42.8008, float_result);
 
