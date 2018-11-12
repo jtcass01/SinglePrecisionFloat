@@ -1,6 +1,6 @@
 #include "headers/test.h"
 
-uint8_t float_result[32];
+char float_result[32];
 
 char *ftoa(float input, char result[]) {
 	char const digit[] = "0123456789";
