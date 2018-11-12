@@ -2,7 +2,7 @@
 
 char float_result[32];
 
-char *ftoa(float input, char result[]) {
+char *ftoa2(float input, char result[]) {
 	char const digit[] = "0123456789";
 	char *p = result;
 
@@ -40,6 +40,52 @@ char *ftoa(float input, char result[]) {
 	return result;
 }
 
+char* itoa(int i, char b[]){
+    char const digit[] = "0123456789";
+    char* p = b;
+    if(i<0){
+        *p++ = '-';
+        i *= -1;
+    }
+    int shifter = i;
+    do{ //Move to where representation ends
+        ++p;
+        shifter = shifter/10;
+    }while(shifter);
+    *p = '\0';
+    do{ //Move back, inserting digits as u go
+        *--p = digit[i%10];
+        i = i/10;
+    }while(i);
+    return b;
+}
+
+// Converts a floating point number to string.
+void ftoa(float n, char *res, int afterpoint)
+{
+    // Extract integer part
+    int ipart = (int)n;
+
+    // Extract floating part
+    float fpart = n - (float)ipart;
+
+    // convert integer part to string
+    int i = itoa(ipart, res);
+
+    // check for display option after point
+    if (afterpoint != 0)
+    {
+        res[i] = '.';  // add dot
+
+        // Get the value of fraction part upto given no.
+        // of points after dot. The third parameter is needed
+        // to handle cases like 233.007
+        fpart = fpart * pow(10, afterpoint);
+
+        itoa((int)fpart, res + i + 1);
+    }
+}
+
 void prompt_convert_number(void) {
   float classic_float;
   SinglePrecisionFloat *spf_float;
@@ -57,7 +103,7 @@ void prompt_convert_number(void) {
   delete_single_precision_float(spf_float);
 
 
-  ftoa(42.8008, float_result);
+  ftoa(42.8008, float_result, 4);
 
   printf("Testing ftoa function.  %f in ascii is %s", 42.8008, float_result);
 }
