@@ -70,19 +70,27 @@ void ftoa(float n, char *res, int afterpoint)
     float fpart = n - (float)ipart;
 
     // convert integer part to string
-    int i = itoa(ipart, res);
+    itoa(ipart, res);
+
+    //find size of int
+    int int_size = 0;
+    for(int i = 0; *(i + res) != '\0'; i++) {
+      int_size++;
+    }
 
     // check for display option after point
     if (afterpoint != 0)
     {
-        res[i] = '.';  // add dot
+        res[int_size] = '.';  // add dot
 
         // Get the value of fraction part upto given no.
         // of points after dot. The third parameter is needed
         // to handle cases like 233.007
-        fpart = fpart * pow(10, afterpoint);
+        for(int i = 0; i < afterpoint; i++){
+          fpart *= 10;
+        }
 
-        itoa((int)fpart, res + i + 1);
+        itoa((int)fpart, res + int_size + 1);
     }
 }
 
